@@ -1,0 +1,465 @@
+/* ==========================================================================
+   ROHIL TECHNOLOGIES — HCLTech-Inspired Top Hero Keynote Banner Styles
+   ========================================================================== */
+
+/* 1. Main Hero Section Wrapper */
+.hcl-top-hero-section {
+  position: relative;
+  width: 100%;
+  padding-top: 135px;
+  padding-bottom: 0;
+  background: 
+    radial-gradient(ellipse at 85% 15%, rgba(56, 139, 253, 0.32) 0%, transparent 60%),
+    radial-gradient(ellipse at 15% 85%, rgba(99, 102, 241, 0.28) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 50%, rgba(30, 64, 175, 0.35) 0%, transparent 70%),
+    linear-gradient(135deg, #071947 0%, #0d2f88 45%, #081d54 100%);
+  color: #ffffff;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.15);
+}
+
+/* Subtle architectural diagonal grid lines */
+.hcl-top-hero-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.8;
+}
+
+.hcl-top-hero-ambient {
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 194, 255, 0.18) 0%, transparent 70%);
+  pointer-events: none;
+  filter: blur(40px);
+  z-index: 0;
+}
+
+.hcl-top-hero-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1260px;
+  margin: 0 auto;
+  padding-bottom: 44px;
+}
+
+/* 2. Two-Column Hero Grid */
+.hcl-top-hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 48px;
+  align-items: center;
+}
+
+@media (max-width: 960px) {
+  .hcl-top-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+/* 5. Left Column: Widescreen Keynote Video Player */
+.hcl-top-hero-video-col {
+  position: relative;
+}
+
+.hcl-video-player-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 18px;
+  overflow: hidden;
+  background-color: #030d22;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 
+    0 24px 60px -12px rgba(3, 13, 34, 0.65),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.hcl-video-player-frame:hover {
+  box-shadow: 
+    0 32px 70px -12px rgba(3, 13, 34, 0.8),
+    0 0 0 1px rgba(56, 189, 248, 0.35);
+}
+
+.hcl-keynote-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  cursor: pointer;
+}
+
+.hcl-video-live-pill {
+  position: absolute;
+  top: 16px;
+  left: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: rgba(3, 13, 34, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 0.725rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hcl-video-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #10b981;
+  box-shadow: 0 0 8px #10b981;
+}
+
+/* Center Play Button Overlay */
+.hcl-video-play-center-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: #071947;
+  border: 2px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
+  z-index: 3;
+}
+
+.hcl-video-player-frame:hover .hcl-video-play-center-btn,
+.hcl-video-play-center-btn.is-paused {
+  opacity: 1;
+}
+
+.hcl-video-play-center-btn:hover {
+  background: #ffffff;
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+/* Bottom Controls */
+.hcl-video-bottom-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px 16px;
+  background: linear-gradient(to top, rgba(3, 13, 34, 0.92) 0%, transparent 100%);
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.hcl-video-player-frame:hover .hcl-video-bottom-controls {
+  opacity: 1;
+}
+
+.hcl-video-progress-track {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 2px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.hcl-video-progress-fill {
+  height: 100%;
+  background: #38bdf8;
+  border-radius: 2px;
+  transition: width 0.1s linear;
+}
+
+.hcl-video-controls-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hcl-ctrl-icon-btn {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 6px;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.hcl-ctrl-icon-btn:hover {
+  color: #38bdf8;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.hcl-ctrl-fs {
+  margin-left: auto;
+}
+
+.hcl-video-time-label {
+  font-size: 0.785rem;
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+/* Fallback / Alternate Slide Frame */
+.hcl-image-spotlight-frame {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.hcl-spotlight-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hcl-spotlight-overlay {
+  position: absolute;
+  top: 16px;
+  left: 18px;
+}
+
+/* 6. Right Column: Statement Heading, Description & Action Buttons */
+.hcl-top-hero-narrative-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.hcl-top-hero-statement-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.45rem, 2.3vw, 2.05rem);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  margin: 0 0 18px 0;
+}
+
+.hcl-top-hero-statement-desc {
+  font-family: var(--font-sans);
+  font-size: 1.025rem;
+  color: #cbd5e1;
+  line-height: 1.68;
+  margin: 0 0 28px 0;
+}
+
+/* Buttons matching HCLTech Reference Screenshot */
+.hcl-top-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.hcl-top-watch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 28px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #071947;
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hcl-top-watch-btn:hover {
+  background-color: #f1f5f9;
+  color: #0047cc;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+}
+
+.hcl-top-consult-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 0.925rem;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hcl-top-consult-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.hcl-hero-trust-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.hcl-hero-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.hcl-trust-icon {
+  color: #38bdf8;
+}
+
+/* 7. Bottom Consultation Strip: "Have tech questions? Our architects can help." */
+.hcl-ask-engine-strip {
+  width: 100%;
+  background: rgba(238, 241, 248, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 36px 0;
+  border-top: 1px solid rgba(226, 232, 240, 0.85);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.85);
+}
+
+.hcl-ask-engine-card {
+  max-width: 980px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hcl-ask-engine-header {
+  margin-bottom: 20px;
+}
+
+.hcl-ask-engine-title {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+  font-weight: 700;
+  color: var(--brand-navy-950);
+  margin-bottom: 4px;
+}
+
+.hcl-ask-engine-subtitle {
+  font-size: 1.05rem;
+  color: var(--slate-600);
+}
+
+.hcl-ask-engine-subtitle strong {
+  color: var(--brand-blue-700);
+}
+
+.hcl-ask-engine-form {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.hcl-ask-engine-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid rgba(203, 213, 225, 0.85);
+  border-radius: 999px;
+  padding: 6px 8px 6px 24px;
+  box-shadow: 0 10px 28px -4px rgba(10, 27, 56, 0.08);
+  transition: all 0.25s ease;
+}
+
+.hcl-ask-engine-input-wrap:focus-within {
+  border-color: var(--brand-blue-600);
+  box-shadow: 0 12px 32px -4px rgba(0, 71, 204, 0.16), 0 0 0 3px rgba(0, 102, 255, 0.12);
+}
+
+.hcl-ask-engine-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--slate-800);
+}
+
+.hcl-ask-engine-input::placeholder {
+  color: var(--slate-400);
+}
+
+.hcl-ask-engine-submit-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--brand-blue-700);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.hcl-ask-engine-submit-btn:hover {
+  background: var(--brand-blue-600);
+  transform: scale(1.05);
+}
+
+@media (max-width: 640px) {
+  .hcl-top-hero-section {
+    padding-top: 115px;
+  }
+  
+  .hcl-top-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .hcl-top-watch-btn,
+  .hcl-top-consult-btn {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,233 @@
+/* ==========================================================================
+   ROHIL TECHNOLOGIES - Company Introduction Section (After Hero Video)
+   ========================================================================== */
+
+.company-intro-section {
+  position: relative;
+  padding: 110px 0 100px;
+  background: transparent;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* Subtle background architectural lines / ambient lighting */
+.company-intro-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1200px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(0, 71, 204, 0.2) 50%, transparent 100%);
+}
+
+.intro-content-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --------------------------------------------------------------------------
+   Step 1: Main Heading
+   -------------------------------------------------------------------------- */
+.intro-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 5vw, 3.85rem);
+  font-weight: 800;
+  color: var(--brand-navy-950);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin: 0 0 18px 0;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.intro-heading.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Optional Micro-Interaction: Accent Line Under Heading */
+.intro-accent-line {
+  height: 3px;
+  width: 0;
+  opacity: 0;
+  background: linear-gradient(90deg, var(--brand-blue-700) 0%, var(--brand-blue-500) 100%);
+  border-radius: 999px;
+  margin: 0 auto 22px;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s,
+    opacity 0.6s ease 0.3s;
+}
+
+.intro-accent-line.animate-in {
+  width: 72px;
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Step 2: Company Tagline
+   -------------------------------------------------------------------------- */
+.intro-tagline-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 32px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.38s,
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.38s;
+  will-change: opacity, transform;
+}
+
+.intro-tagline-wrapper.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.intro-tagline {
+  font-family: var(--font-heading);
+  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+  font-weight: 600;
+  color: var(--brand-blue-700);
+  letter-spacing: 0.01em;
+  background: rgba(0, 71, 204, 0.04);
+  border: 1px solid rgba(0, 71, 204, 0.12);
+  padding: 8px 22px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.intro-tagline-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--brand-blue-600);
+  box-shadow: 0 0 8px rgba(0, 102, 255, 0.6);
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Step 3: Description Paragraph (Line / Segment Reveal)
+   -------------------------------------------------------------------------- */
+.intro-description-wrapper {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.intro-description-paragraph {
+  font-family: var(--font-sans);
+  font-size: clamp(1.05rem, 1.6vw, 1.18rem);
+  color: #475569;
+  line-height: 1.82;
+  font-weight: 400;
+  margin: 0;
+  text-align: center;
+}
+
+.intro-sentence {
+  display: inline;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.intro-sentence.sentence-1.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.55s;
+}
+
+.intro-sentence.sentence-2.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.72s;
+}
+
+.intro-sentence.sentence-3.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.88s;
+}
+
+/* Key Highlight Words within description */
+.intro-highlight {
+  color: var(--brand-navy-900);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Design
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .company-intro-section {
+    padding: 96px 0 84px;
+  }
+
+  .intro-content-wrapper {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .company-intro-section {
+    padding: 76px 0 68px;
+  }
+
+  .intro-heading {
+    margin-bottom: 14px;
+  }
+
+  .intro-tagline-wrapper {
+    margin-bottom: 24px;
+  }
+
+  .intro-tagline {
+    padding: 6px 16px;
+    font-size: 0.95rem;
+  }
+
+  .intro-description-paragraph {
+    font-size: 1.025rem;
+    line-height: 1.75;
+    text-align: left;
+  }
+}
+
+@media (max-width: 480px) {
+  .company-intro-section {
+    padding: 64px 0 56px;
+  }
+
+  .intro-tagline {
+    font-size: 0.885rem;
+    padding: 5px 14px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Accessibility: Prefers-Reduced-Motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+
+  .intro-heading,
+  .intro-accent-line,
+  .intro-tagline-wrapper,
+  .intro-sentence {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    width: 72px !important;
+  }
+}

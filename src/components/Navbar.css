@@ -1,0 +1,708 @@
+/* ==========================================================================
+   ROHIL TECHNOLOGIES - Minimal, Premium Navbar & Dropdown Styles
+   ========================================================================== */
+@import './dropdowns/MegaMenu.css';
+
+/* Header Wrapper - Floating Container positioned over Hero */
+.site-header {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2000 !important;
+  padding: 18px 24px 0;
+  pointer-events: none;
+  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+              padding 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.site-header.scrolled {
+  padding: 10px 24px 0;
+}
+
+/* Scroll Direction: Hide on scroll down, return on scroll up */
+.site-header.nav-hidden {
+  transform: translateY(-130%);
+  pointer-events: none;
+}
+
+/* Section 10: Navbar Entrance Animation */
+@keyframes navbarEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Large Horizontal Rounded Floating Pill Navigation Container */
+.navbar-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  height: 64px;
+  background-color: rgba(245, 247, 255, 0.78);
+  backdrop-filter: blur(15px) saturate(140%);
+  -webkit-backdrop-filter: blur(15px) saturate(140%);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: auto;
+  position: relative;
+  animation: navbarEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.1s backwards;
+  transition: background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.site-header.scrolled .navbar-container {
+  background-color: rgba(245, 247, 255, 0.85);
+  border-color: #cbd5e1;
+  box-shadow: 0 14px 38px -4px rgba(15, 23, 42, 0.12), 0 4px 14px -2px rgba(15, 23, 42, 0.05);
+}
+
+/* Brand Logo (Far Left) */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+  padding: 2px 0;
+  transition: opacity 0.2s ease;
+}
+
+.navbar-brand:hover {
+  opacity: 0.9;
+}
+
+.navbar-logo-img {
+  height: 38px;
+  width: auto;
+  max-width: 190px;
+  object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .navbar-logo-img {
+    height: 32px;
+    max-width: 155px;
+  }
+}
+
+/* Desktop Navigation List */
+.desktop-navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+@media (max-width: 1024px) {
+  .desktop-navbar-nav {
+    display: none;
+  }
+}
+
+.nav-link-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Section 4: Nav Item Button & Subtle Hover Effect */
+.nav-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  font-size: 0.915rem;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  color: #1e293b;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  transition: color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  line-height: 1;
+}
+
+.nav-button:hover,
+.nav-button.menu-open {
+  color: #0047cc;
+  background-color: rgba(0, 71, 204, 0.05);
+}
+
+.nav-button.is-active {
+  color: #0047cc;
+  font-weight: 600;
+}
+
+.nav-button.is-active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 12px;
+  right: 12px;
+  height: 2px;
+  background-color: #0047cc;
+  border-radius: 2px;
+}
+
+/* Subtle Chevron Beside Dropdown Triggers */
+.nav-chevron {
+  margin-left: 5px;
+  color: #64748b;
+  flex-shrink: 0;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+}
+
+.nav-button:hover .nav-chevron,
+.nav-button.menu-open .nav-chevron {
+  color: #0047cc;
+}
+
+.nav-chevron.rotated {
+  transform: rotate(180deg);
+}
+
+/* ==========================================================================
+   Section 5 & 6: Minimal Floating Dropdown Panels & Open Animation
+   ========================================================================== */
+
+.floating-dropdown-anchor {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding-top: 6px;
+  z-index: 1050;
+  animation: dropdownEnter 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, transform;
+}
+
+/* Section 18: Forgiving hover bridge between navbar item and floating panel */
+.floating-dropdown-anchor::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -20px;
+  right: -20px;
+  height: 16px;
+}
+
+/* Dropdown Open Sequence: Opacity 0 -> 1, Y: -6px -> 0 */
+@keyframes dropdownEnter {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-6px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Base Dropdown Panel */
+.minimal-dropdown-panel {
+  background-color: rgba(245, 247, 255, 0.78);
+  backdrop-filter: blur(15px) saturate(140%);
+  -webkit-backdrop-filter: blur(15px) saturate(140%);
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  box-shadow: 0 12px 30px -4px rgba(15, 23, 42, 0.08), 0 4px 10px -2px rgba(15, 23, 42, 0.04);
+  padding: 6px;
+  position: relative;
+}
+
+/* Sizing for single-column menus */
+.company-dropdown {
+  width: 210px;
+  min-width: 200px;
+}
+
+.services-dropdown {
+  width: 325px;
+  min-width: 315px;
+}
+
+/* Sizing for compact multi-column menus (Industries & Product) */
+.multi-col-dropdown {
+  width: 440px;
+  min-width: 420px;
+}
+
+.compact-two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+
+.dropdown-menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Menu Item Links */
+.dropdown-menu-link {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 11px;
+  border-radius: 6px;
+  font-size: 0.855rem;
+  font-weight: 500;
+  color: #334155;
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  text-align: left;
+  line-height: 1.35;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.dropdown-menu-link:hover,
+.dropdown-menu-link.is-active-row {
+  color: #0047cc;
+  background-color: #f0f6ff;
+  padding-left: 13px;
+}
+
+.dropdown-menu-link .menu-arrow {
+  color: #94a3b8;
+  margin-left: 8px;
+  flex-shrink: 0;
+  transition: transform 0.18s ease, color 0.18s ease;
+}
+
+.dropdown-menu-link:hover .menu-arrow,
+.dropdown-menu-link.is-active-row .menu-arrow {
+  color: #0047cc;
+  transform: translateX(2px);
+}
+
+/* ==========================================================================
+   Section 9 & 10: Nested Flyout Submenu (Beside the Parent Item)
+   ========================================================================== */
+
+.nested-trigger-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Section 18: Forgiving hover bridge between parent row and flyout submenu */
+.nested-trigger-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -8px;
+  width: 14px;
+  height: 100%;
+  z-index: 1060;
+}
+
+.nested-submenu-panel {
+  position: absolute;
+  top: -4px;
+  left: calc(100% + 4px);
+  background-color: rgba(245, 247, 255, 0.78);
+  backdrop-filter: blur(15px) saturate(140%);
+  -webkit-backdrop-filter: blur(15px) saturate(140%);
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  box-shadow: 0 12px 30px -4px rgba(15, 23, 42, 0.08), 0 4px 10px -2px rgba(15, 23, 42, 0.04);
+  padding: 6px;
+  z-index: 1070;
+  animation: submenuEnter 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, transform;
+}
+
+/* Nested Animation: Opacity 0 -> 1, X: -5px -> 0 */
+@keyframes submenuEnter {
+  0% {
+    opacity: 0;
+    transform: translateX(-5px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.about-submenu {
+  width: 200px;
+  min-width: 190px;
+}
+
+.mobile-app-submenu {
+  width: 260px;
+  min-width: 250px;
+}
+
+/* ==========================================================================
+   Navbar Right Actions & Mobile Controls
+   ========================================================================== */
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.nav-icon-btn:hover {
+  background: #f1f5f9;
+  color: #0047cc;
+  border-color: #e2e8f0;
+}
+
+@media (max-width: 768px) {
+  .nav-icon-btn {
+    display: none;
+  }
+}
+
+.nav-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #0047cc;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  box-shadow: 0 2px 8px rgba(0, 71, 204, 0.2);
+}
+
+.nav-cta-btn:hover {
+  background-color: #0037a3;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 640px) {
+  .nav-cta-btn {
+    display: none;
+  }
+}
+
+@media (max-width: 1200px) {
+  .nav-button {
+    padding: 7px 9px;
+    font-size: 0.875rem;
+  }
+
+  .navbar-actions {
+    gap: 8px;
+  }
+
+  .nav-cta-btn {
+    padding: 7px 12px;
+    font-size: 0.825rem;
+  }
+}
+
+.hamburger-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #1e293b;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.hamburger-btn:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+@media (max-width: 1024px) {
+  .hamburger-btn {
+    display: flex;
+  }
+}
+
+/* ==========================================================================
+   Mobile Drawer & Touch Accordion
+   ========================================================================== */
+
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 1999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.mobile-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 86vw;
+  max-width: 380px;
+  background: #ffffff;
+  z-index: 2000;
+  box-shadow: -8px 0 25px rgba(15, 23, 42, 0.12);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+}
+
+.mobile-drawer.is-open {
+  transform: translateX(0);
+}
+
+.mobile-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e2e8f0;
+  background: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.mobile-drawer-logo {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+}
+
+.drawer-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  background: #f1f5f9;
+  color: #475569;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.drawer-close-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.mobile-nav-content {
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.mobile-accordion-item {
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 2px;
+}
+
+.mobile-accordion-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 4px;
+  font-size: 0.975rem;
+  font-weight: 600;
+  color: #1e293b;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: color 0.15s ease;
+}
+
+.mobile-accordion-btn:hover,
+.mobile-accordion-btn.is-expanded {
+  color: #0047cc;
+}
+
+.mobile-accordion-icon {
+  transition: transform 0.2s ease;
+  color: #94a3b8;
+}
+
+.mobile-accordion-btn.is-expanded .mobile-accordion-icon {
+  transform: rotate(180deg);
+  color: #0047cc;
+}
+
+.mobile-accordion-collapse {
+  padding-left: 6px;
+  padding-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  animation: fadeIn 0.15s ease-out;
+}
+
+.mobile-sub-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  font-size: 0.885rem;
+  font-weight: 500;
+  color: #475569;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+.mobile-sub-btn:hover,
+.mobile-sub-btn.is-sub-expanded {
+  background: #f8fafc;
+  color: #0047cc;
+}
+
+.mobile-nested-collapse {
+  padding-left: 12px;
+  margin: 4px 0 6px;
+  border-left: 2px solid #bfdbfe;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mobile-nested-link {
+  display: block;
+  width: 100%;
+  padding: 7px 10px;
+  font-size: 0.835rem;
+  font-weight: 500;
+  color: #64748b;
+  border-radius: 4px;
+  text-align: left;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.mobile-nested-link:hover {
+  color: #0047cc;
+  background: #f0f6ff;
+}
+
+.mobile-direct-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 4px;
+  font-size: 0.975rem;
+  font-weight: 600;
+  color: #1e293b;
+  text-decoration: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: color 0.15s ease;
+}
+
+.mobile-direct-link:hover,
+.mobile-direct-link.is-active {
+  color: #0047cc;
+}
+
+.mobile-drawer-footer {
+  padding: 16px 20px;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-footer-cta {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 6px;
+  color: #ffffff;
+  background-color: #0047cc;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.mobile-footer-cta:hover {
+  background-color: #0037a3;
+}
+
+.mobile-drawer-contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.mobile-drawer-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

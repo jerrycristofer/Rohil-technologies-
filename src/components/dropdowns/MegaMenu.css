@@ -1,0 +1,402 @@
+/* ==========================================================================
+   ROHIL TECHNOLOGIES — HCLTech-Inspired Enterprise Mega-Menu Styles
+   ========================================================================== */
+
+/* Mega-Menu Anchor - Floating directly below the navbar */
+.mega-dropdown-anchor {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(94vw, 1220px);
+  z-index: 2500;
+  pointer-events: auto;
+  animation: megaDropdownEnter 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, transform;
+}
+
+/* Forgiving invisible hover bridge connecting navbar to dropdown panel */
+.mega-dropdown-anchor::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 0;
+  right: 0;
+  height: 18px;
+  pointer-events: auto;
+}
+
+/* Smooth Entrance: Opacity 0 -> 1, Y: -6px -> 0 */
+@keyframes megaDropdownEnter {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-6px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* ==========================================================================
+   Mega-Menu Main Panel Container
+   ========================================================================== */
+.mega-menu-panel {
+  background-color: rgba(245, 247, 255, 0.78);
+  backdrop-filter: blur(15px) saturate(140%);
+  -webkit-backdrop-filter: blur(15px) saturate(140%);
+  border-radius: 20px;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 24px 60px -12px rgba(15, 23, 42, 0.14),
+    0 8px 24px -4px rgba(15, 23, 42, 0.06);
+  padding: 32px 36px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Multi-Column Grid Layout */
+.mega-menu-grid {
+  display: grid;
+  gap: 36px;
+  align-items: start;
+}
+
+/* 4-Column Layout: 3 Navigation Columns + 1 Featured Card */
+.mega-grid-4-cols {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) 290px;
+}
+
+/* 3-Column Layout: 2 Navigation Columns + 1 Featured Card */
+.mega-grid-3-cols {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) 310px;
+}
+
+/* ==========================================================================
+   Navigation Columns & Category Headings
+   ========================================================================== */
+.mega-menu-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.mega-category-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Category Headings (HCLTech Style: Medium/Semi-bold, dark neutral) */
+.mega-category-heading {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+  margin: 0 0 4px 0;
+  padding: 4px 0;
+  line-height: 1.35;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mega-category-heading-button {
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #0f172a;
+  padding: 4px 0;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.18s ease;
+}
+
+.mega-category-heading-button:hover {
+  color: #0047cc;
+}
+
+/* List of standard items within a category */
+.mega-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Individual Dropdown Item Link */
+.mega-item-link {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.885rem;
+  font-weight: 500;
+  color: #334155;
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  text-align: left;
+  line-height: 1.45;
+  transition: color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mega-item-link:hover {
+  color: #0047cc;
+  background-color: rgba(0, 71, 204, 0.05);
+  transform: translateX(3px);
+}
+
+.mega-item-label {
+  flex: 1;
+}
+
+/* Optional Small Badge beside Item */
+.mega-item-tag {
+  font-size: 0.685rem;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background-color: #f1f5f9;
+  color: #475569;
+  margin-left: 8px;
+  letter-spacing: 0.02em;
+}
+
+.mega-item-tag.tag-accent {
+  background-color: #e0edff;
+  color: #0047cc;
+}
+
+/* ==========================================================================
+   HCLTech-Style Subtle Tree Hierarchy / Connector Lines
+   ========================================================================== */
+.mega-tree-list {
+  position: relative;
+  padding-left: 14px;
+  margin: 2px 0 8px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+/* Vertical trunk line connecting parent to children */
+.mega-tree-list::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 14px;
+  left: 0;
+  width: 1px;
+  background-color: #cbd5e1;
+}
+
+/* Individual tree item with horizontal branch connector line */
+.mega-tree-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Horizontal branch connector line */
+.mega-tree-item::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -14px;
+  width: 14px;
+  height: 1px;
+  background-color: #cbd5e1;
+}
+
+.mega-tree-link {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 8px;
+  border-radius: 6px;
+  font-size: 0.845rem;
+  font-weight: 500;
+  color: #475569;
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  text-align: left;
+  line-height: 1.4;
+  transition: color 0.18s ease, transform 0.18s ease, background-color 0.18s ease;
+}
+
+.mega-tree-link:hover {
+  color: #0047cc;
+  background-color: rgba(0, 71, 204, 0.05);
+  transform: translateX(3px);
+}
+
+/* ==========================================================================
+   Featured Card on the Right (HCLTech Style)
+   ========================================================================== */
+.mega-featured-card {
+  background: linear-gradient(150deg, #071e4a 0%, #0047cc 55%, #051433 100%);
+  border-radius: 16px;
+  padding: 24px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 280px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 12px 30px -5px rgba(0, 71, 204, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Subtle background contour lines */
+.mega-featured-card::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -30%;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 70%);
+  pointer-events: none;
+}
+
+.mega-featured-card::after {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  left: -20%;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, rgba(56, 189, 248, 0) 70%);
+  pointer-events: none;
+}
+
+.mega-featured-top {
+  position: relative;
+  z-index: 1;
+}
+
+.mega-featured-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.685rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #93c5fd;
+  background-color: rgba(255, 255, 255, 0.14);
+  padding: 4px 10px;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  margin-bottom: 14px;
+}
+
+.mega-featured-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.28;
+  margin: 0 0 10px 0;
+  letter-spacing: -0.015em;
+}
+
+.mega-featured-desc {
+  font-size: 0.825rem;
+  color: #cbd5e1;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.mega-featured-bottom {
+  position: relative;
+  z-index: 1;
+  margin-top: 24px;
+}
+
+.mega-featured-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #ffffff;
+  color: #071e4a;
+  font-size: 0.835rem;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.mega-featured-btn:hover {
+  background-color: #f0f6ff;
+  color: #0047cc;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+@media (max-width: 1200px) {
+  .mega-menu-panel {
+    padding: 26px 28px;
+  }
+
+  .mega-menu-grid {
+    gap: 24px;
+  }
+
+  .mega-grid-4-cols {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) 250px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .mega-dropdown-anchor {
+    width: 95vw;
+  }
+
+  .mega-grid-4-cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) 240px;
+  }
+
+  .mega-grid-3-cols {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .mega-featured-card {
+    display: none;
+    /* Hide featured card on constrained tablet to prioritize items */
+  }
+}
+
+/* Section 16: Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .mega-dropdown-anchor {
+    animation: none !important;
+  }
+
+  .mega-item-link,
+  .mega-tree-link,
+  .mega-featured-btn {
+    transition: none !important;
+    transform: none !important;
+  }
+}
